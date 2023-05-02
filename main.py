@@ -218,6 +218,8 @@ def main():
             for e in missing_list:
               print(name)
             print("\n")
+          else:
+            print("\n")
 
           ### END POST LIST HANDLING ###
 
