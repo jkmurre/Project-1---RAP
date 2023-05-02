@@ -191,8 +191,9 @@ def main():
           
           # Print the total number of members...
           print("\n")
-          print(f"Total Members: {i}")
-          total_members = i # Assign total members to variable for later graphing functions...
+          print(f"Total Members: {i - 2}")
+          print("\n")
+          total_members = i - 2 # Assign total members to variable for later graphing functions...
 
           ### START POST LIST HANDLING ###
 
