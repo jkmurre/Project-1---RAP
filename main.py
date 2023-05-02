@@ -151,6 +151,7 @@ def main():
           three_month_list = []
           regresssion_list = []
           probation_list = []
+          missing_list = []
 
           for row in reader:
             i += 1
@@ -181,6 +182,9 @@ def main():
                   probation_list.remove(name)
                 if name in one_month_list:
                   one_month_list.remove(name)
+              
+              if crew_code == "MISSING":
+                missing_list.append(crew_code)
                 
 
               ### END UPDATE ###
