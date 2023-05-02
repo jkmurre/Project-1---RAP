@@ -184,7 +184,7 @@ def main():
                   one_month_list.remove(name)
               
               if crew_code == "MISSING":
-                missing_list.append(crew_code)
+                missing_list.append(name)
                 
 
               ### END UPDATE ###
@@ -211,6 +211,12 @@ def main():
             print("Regression List:\n")
             for e in regresssion_list: # For every name on the regression list, print their name...
               print(e)
+
+          if len(missing_list) > 0:
+            print("\n")
+            print("Missing List: ")
+            for e in missing_list:
+              print(name)
             print("\n")
 
           ### END POST LIST HANDLING ###
