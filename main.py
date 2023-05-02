@@ -163,7 +163,7 @@ def main():
               # Extract flight counts for each month starting from October
               flight_counts = row[2:14]
 
-              ### UPDATE: LIST HANDLING ###
+              ### OUTPUT LIST HANDLING ###
 
               if one_month_lookback(flight_counts,crew_code) == "FAIL": # If the person has failed their 1-month lookback, append them to the 1-month lookback list.
                 one_month_list.append(name)
@@ -185,17 +185,18 @@ def main():
               
               if crew_code == "MISSING":
                 missing_list.append(name)
-                
-
-              ### END UPDATE ###
 
               # RAW DATA FOR PRINT
               print(f"{i - 2} Name: {name}, Code: {full_crew_code}, 1-Month: {one_month_lookback(flight_counts,crew_code)}, 3-Month: {three_month_lookback(flight_counts, crew_code)}, Probation: {probation(flight_counts, crew_code)}, Regression: {regression(flight_counts, crew_code)}")
+          
+          # Print the total number of members...
+          print("\n")
+          print(f"Total Members: {i}")
+          total_members = i # Assign total members to variable for later graphing functions...
 
           ### START POST LIST HANDLING ###
 
           if len(one_month_list) > 0: # Check if the one_month_list is even populated...
-            print("\n")
             print("One Month Failures:\n")
             for e in one_month_list: # For every name in the list, print the name.
               print(e)
