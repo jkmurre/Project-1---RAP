@@ -171,9 +171,16 @@ def main():
 
               if probation(flight_counts,crew_code) == "YES": # If the person is on probation, add them to the list.
                 probation_list.append(name)
+                if name in one_month_list:
+                  one_month_list.remove(name)
 
               if regression(flight_counts,crew_code) == "YES": # If the person is on regression, add them to the list. 
                 regresssion_list.append(name)
+                if name in probation_list:
+                  probation_list.remove(name)
+                if name in one_month_list:
+                  one_month_list.remove(name)
+                
 
               ### END UPDATE ###
 
@@ -182,29 +189,26 @@ def main():
 
           ### START POST LIST HANDLING ###
 
+          # TODO: Evaluate each list as the other list is built and remove the entry if it is on the previous list. This will prevent duplicates.
+
           if len(one_month_list) > 0: # Check if the one_month_list is even populated...
             print("\n")
             print("One Month Failures:\n")
             for e in one_month_list: # For every name in the list, print the name.
               print(e)
 
-          if len(three_month_list) > 0: # Check if the three_month_list is even populated...
-            print("\n")
-            print("Three month failures:\n")
-            for e in three_month_list: # For every name in the three month list, print the name...
-              print(e)
-
-          if len(regresssion_list) > 0:
-            print("\n")
-            print("Regression List:\n")
-            for e in regresssion_list:
-              print(e)
-          
           if len(probation_list) > 0:
             print("\n")
             print("Probation List:\n")
-            for e in probation_list:
+            for e in probation_list: # For every name on probation list, print their name... 
               print(e)
+
+          if len(regresssion_list) > 0: 
+            print("\n")
+            print("Regression List:\n")
+            for e in regresssion_list: # For every name on the regression list, print their name...
+              print(e)
+            print("\n")
 
           ### END POST LIST HANDLING ###
 
