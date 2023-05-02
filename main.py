@@ -59,10 +59,8 @@ last_day_of_previous_month = first_day_of_this_month - datetime.timedelta(days=1
 previous_month = last_day_of_previous_month.strftime('%B')
 
 # NOTE: Someone is on probation if they have failed their one and three month. If the member fails again, then they are on regression.
-# TODO: Sort outputs by pass/fail, yes/no. Oooh, use radio buttons to apply filters! 
 
-# TODO: Use recurssion to clean things up...
-# TODO: Either clean things up by putting all the functions into another file, or using OOP in another file. 
+# TODO: Clean things up... Look at using OOB, Recursion, modules, or libraries. 
 
 def one_month_lookback(flight_counts, crew_code):
   if crew_code in one_month_dict:
@@ -113,7 +111,12 @@ def probation(flight_counts, crew_code):
     probation_status = "NO"
     return probation_status
 
-def regression(flight_counts,crew_code):
+def regression(flight_counts, crew_code):
+
+# TODO: Add a remove_from_probation function.
+
+# TODO: Add a remove_from_regression function.
+
   if one_month_lookback(flight_counts,crew_code) and three_month_lookback(flight_counts,crew_code) == "FAIL":
     flights_required = three_month_dict[crew_code]
     prev_month1 = month_nums[previous_month] - 2 
@@ -149,8 +152,6 @@ def main():
           regresssion_list = []
           probation_list = []
 
-          ### END NEW LISTS ###
-
           for row in reader:
             i += 1
             if i >= 3: #Skip the headers in the CSV file.
@@ -184,12 +185,10 @@ def main():
 
               ### END UPDATE ###
 
-              # RAW FOR PRINT
+              # RAW DATA FOR PRINT
               print(f"{i - 2} Name: {name}, Code: {full_crew_code}, 1-Month: {one_month_lookback(flight_counts,crew_code)}, 3-Month: {three_month_lookback(flight_counts, crew_code)}, Probation: {probation(flight_counts, crew_code)}, Regression: {regression(flight_counts, crew_code)}")
 
           ### START POST LIST HANDLING ###
-
-          # TODO: Evaluate each list as the other list is built and remove the entry if it is on the previous list. This will prevent duplicates.
 
           if len(one_month_list) > 0: # Check if the one_month_list is even populated...
             print("\n")
