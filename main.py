@@ -52,6 +52,7 @@ month_nums = {
   "September":12
 }
 
+# Date handling 
 today = datetime.date.today()
 first_day_of_this_month = datetime.date(today.year, today.month, 1)
 last_day_of_previous_month = first_day_of_this_month - datetime.timedelta(days=1)
@@ -140,6 +141,16 @@ def main():
         with open(input_file, 'r') as csvfile: #Open input file.Open inp
           reader = csv.reader(csvfile) #Generate csv read file.
           i = 0
+
+          ### INITIALIZE LISTS ###
+
+          one_month_list = []
+          three_month_list = []
+          regresssion_list = []
+          probation_list = []
+
+          ### END NEW LISTS ###
+
           for row in reader:
             i += 1
             if i >= 3: #Skip the headers in the CSV file.
@@ -149,7 +160,54 @@ def main():
               full_crew_code = row[1]
               # Extract flight counts for each month starting from October
               flight_counts = row[2:14]
+
+              ### UPDATE: LIST HANDLING ###
+
+              if one_month_lookback(flight_counts,crew_code) == "FAIL": # If the person has failed their 1-month lookback, append them to the 1-month lookback list.
+                one_month_list.append(name)
+
+              if three_month_lookback(flight_counts,crew_code) == "FAIL": # If the person has failed their 3-month, append their name to the 3-month list. 
+                three_month_list.append(name)
+
+              if probation(flight_counts,crew_code) == "YES": # If the person is on probation, add them to the list.
+                probation_list.append(name)
+
+              if regression(flight_counts,crew_code) == "YES": # If the person is on regression, add them to the list. 
+                regresssion_list.append(name)
+
+              ### END UPDATE ###
+
+              # RAW FOR PRINT
               print(f"{i - 2} Name: {name}, Code: {full_crew_code}, 1-Month: {one_month_lookback(flight_counts,crew_code)}, 3-Month: {three_month_lookback(flight_counts, crew_code)}, Probation: {probation(flight_counts, crew_code)}, Regression: {regression(flight_counts, crew_code)}")
+
+          ### START POST LIST HANDLING ###
+
+          if len(one_month_list) > 0: # Check if the one_month_list is even populated...
+            print("\n")
+            print("One Month Failures:\n")
+            for e in one_month_list: # For every name in the list, print the name.
+              print(e)
+
+          if len(three_month_list) > 0: # Check if the three_month_list is even populated...
+            print("\n")
+            print("Three month failures:\n")
+            for e in three_month_list: # For every name in the three month list, print the name...
+              print(e)
+
+          if len(regresssion_list) > 0:
+            print("\n")
+            print("Regression List:\n")
+            for e in regresssion_list:
+              print(e)
+          
+          if len(probation_list) > 0:
+            print("\n")
+            print("Probation List:\n")
+            for e in probation_list:
+              print(e)
+
+          ### END POST LIST HANDLING ###
+
       except FileNotFoundError:
         print("File not found. Please check the file name and try again...")
       except Exception as e:
