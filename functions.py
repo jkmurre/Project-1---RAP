@@ -16,7 +16,7 @@ one_month_dict = {
   "EBE": 1,
   "PBE": 1,
   "KBE": 1,
-  "ISS": 10, #Folks missing their crew codes should stand out...
+  "ISS": 10, # NOTE: Folks missing their crew codes should stand out...
   "PIN": 0
 }
 
@@ -35,7 +35,7 @@ three_month_dict = {
   "EBE": 3,
   "PBE": 2,
   "KBE": 2,
-  "ISS": 30, #Folks missing their crew codes should stand out...
+  "ISS": 30, # NOTE: Folks missing their crew codes should stand out...
   "PIN": 0,
 }
 
